@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principal.Practica5Controller">
+    <children>
+      <Label layoutX="25.0" layoutY="14.0" style="-fx-font-weight: bold;" text="Original" />
+      
+      <RadioButton fx:id="rb1" layoutX="40.0" layoutY="50.0" onAction="#syncRadios" text="Opcion 1" />
+      <CheckBox fx:id="ck4" layoutX="140.0" layoutY="50.0" onAction="#syncChecks" text="Opcion 4" />
+      <TextField fx:id="tfOriginal" layoutX="250.0" layoutY="50.0" onKeyReleased="#handleText" prefWidth="200.0" />
+
+      <RadioButton fx:id="rb2" layoutX="40.0" layoutY="85.0" onAction="#syncRadios" text="Opcion 2" />
+      <CheckBox fx:id="ck5" layoutX="140.0" layoutY="85.0" onAction="#syncChecks" text="Opcion 5" />
+      <ComboBox fx:id="cbOriginal" layoutX="250.0" layoutY="85.0" prefWidth="200.0" />
+
+      <RadioButton fx:id="rb3" layoutX="40.0" layoutY="120.0" onAction="#syncRadios" text="Opcion 3" />
+      <CheckBox fx:id="ck6" layoutX="140.0" layoutY="120.0" onAction="#syncChecks" text="Opcion 6" />
+      <Spinner fx:id="spOriginal" layoutX="250.0" layoutY="120.0" prefWidth="200.0" />
+
+      <Separator layoutX="20.0" layoutY="170.0" prefWidth="460.0" />
+      <Label layoutX="25.0" layoutY="185.0" style="-fx-font-weight: bold;" text="Espejo" />
+
+      <RadioButton fx:id="rb11" disable="true" layoutX="40.0" layoutY="220.0" text="Opcion 1" />
+      <CheckBox fx:id="ck44" disable="true" layoutX="140.0" layoutY="220.0" text="Opcion 4" />
+      <TextField fx:id="tfEspejo" disable="true" layoutX="250.0" layoutY="220.0" prefWidth="200.0" />
+
+      <RadioButton fx:id="rb22" disable="true" layoutX="40.0" layoutY="255.0" text="Opcion 2" />
+      <CheckBox fx:id="ck55" disable="true" layoutX="140.0" layoutY="255.0" text="Opcion 5" />
+      <ComboBox fx:id="cbEspejo" disable="true" layoutX="250.0" layoutY="255.0" prefWidth="200.0" />
+
+      <RadioButton fx:id="rb33" disable="true" layoutX="40.0" layoutY="290.0" text="Opcion 3" />
+      <CheckBox fx:id="ck66" disable="true" layoutX="140.0" layoutY="290.0" text="Opcion 6" />
+      <Spinner fx:id="spEspejo" disable="true" layoutX="250.0" layoutY="290.0" prefWidth="200.0" />
+    </children>
+</AnchorPane>
