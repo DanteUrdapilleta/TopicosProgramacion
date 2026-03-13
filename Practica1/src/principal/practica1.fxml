@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Practica1Controller">
+    <children>
+      <Label fx:id="lbl1" layoutX="55.0" layoutY="45.0" text="Escribe un nombre para saludarlo" />
+      <TextField fx:id="tfNombre" layoutX="55.0" layoutY="85.0" prefWidth="292.0" />
+      <Button fx:id="btnSaludar" layoutX="153.0" layoutY="140.0" onAction="#btnSaludarActionPerformed" text="Saludar" />
+    </children>
+</AnchorPane>
