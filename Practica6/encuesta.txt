@@ -1,0 +1,3 @@
+Mac,S,N,N,22
+Windows,N,N,N,16
+Windows,N,N,N,8

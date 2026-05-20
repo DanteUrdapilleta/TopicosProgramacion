@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principal.Practica6Controller">
+    <children>
+        <Label text="Elige un sistema operativo" layoutX="20" layoutY="20"/>
+        <RadioButton fx:id="rbWin" text="Windows" layoutX="20" layoutY="50"/>
+        <RadioButton fx:id="rbLnx" text="Linux" layoutX="20" layoutY="80"/>
+        <RadioButton fx:id="rbMac" text="Mac" layoutX="20" layoutY="110"/>
+        <Separator layoutX="20" layoutY="145" prefWidth="300"/>
+        <Label text="Uso de la PC" layoutX="20" layoutY="160"/>
+        <CheckBox fx:id="chPrg" text="Programación" layoutX="20" layoutY="190"/>
+        <CheckBox fx:id="chGrf" text="Diseño Gráfico" layoutX="20" layoutY="220"/>
+        <CheckBox fx:id="chAdm" text="Administración" layoutX="20" layoutY="250"/>
+        <Separator layoutX="20" layoutY="285" prefWidth="300"/>
+        <Label text="Horas que dedicas en la PC" layoutX="20" layoutY="300"/>
+        <Slider fx:id="sdHrs" layoutX="20" layoutY="330"
+                min="0" max="24" value="8"/>
+        <Label fx:id="lbHrs" layoutX="160" layoutY="360" text="8"/>
+        <Button text="Guardar"
+                layoutX="120" layoutY="390"
+                onAction="#btnGuardarAction"/>
+    </children>
+</AnchorPane>
