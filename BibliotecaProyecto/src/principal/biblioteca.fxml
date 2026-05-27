@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principal.BibliotecaController">
+    <children>
+      <Label layoutX="24.0" layoutY="14.0"
+             style="-fx-font-weight: bold; -fx-font-size: 16px;"
+             text="SISTEMA DE GESTIÓN DE BIBLIOTECA" />
+
+      <TextField fx:id="txtBuscar" layoutX="24.0" layoutY="55.0"
+                 prefHeight="25.0" prefWidth="320.0"
+                 promptText="Buscar por Título o Autor..." />
+
+      <Button fx:id="btnSincronizar" layoutX="490.0" layoutY="55.0"
+              mnemonicParsing="false"
+              onAction="#btnSincronizarActionPerformed"
+              text="Sincronizar BD" />
+
+      <Label layoutX="24.0" layoutY="100.0"
+             style="-fx-font-weight: bold; -fx-font-size: 12px;"
+             text="INVENTARIO:" />
+
+      <TableView fx:id="tblLibros" layoutX="24.0" layoutY="123.0"
+                 prefHeight="240.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="colIsbn"   prefWidth="120.0" text="ISBN" />
+          <TableColumn fx:id="colTitulo" prefWidth="200.0" text="TÍTULO" />
+          <TableColumn fx:id="colAutor"  prefWidth="160.0" text="AUTOR" />
+          <TableColumn fx:id="colEstado" prefWidth="118.0" text="ESTADO" />
+        </columns>
+      </TableView>
+
+      <Button fx:id="btnPrestar"  layoutX="24.0"  layoutY="385.0"
+              mnemonicParsing="false"
+              onAction="#btnPrestarActionPerformed"
+              text="PRESTAR LIBRO" />
+      <Button fx:id="btnDevolver" layoutX="155.0" layoutY="385.0"
+              mnemonicParsing="false"
+              onAction="#btnDevolverActionPerformed"
+              text="DEVOLVER LIBRO" />
+      <Button fx:id="btnAgregar"  layoutX="295.0" layoutY="385.0"
+              mnemonicParsing="false"
+              onAction="#btnAgregarActionPerformed"
+              text="AGREGAR NUEVO" />
+
+      <Label fx:id="lblEstado" layoutX="24.0" layoutY="430.0"
+             text="Estado: Listo" />
+      <ProgressBar fx:id="progressCarga" layoutX="24.0" layoutY="458.0"
+                   prefHeight="18.0" prefWidth="600.0" progress="0.0" />
+   </children>
+</AnchorPane>
