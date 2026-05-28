@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 public class BibliotecaController implements Initializable {
 
@@ -46,6 +47,67 @@ public class BibliotecaController implements Initializable {
         colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
+        // Habilitar la edición interactiva en la TableView mediante doble clic
+        tblLibros.setEditable(true);
+        
+        // Asignar celdas de tipo texto a las columnas editables
+        colIsbn.setCellFactory(TextFieldTableCell.forTableColumn());
+        colTitulo.setCellFactory(TextFieldTableCell.forTableColumn());
+        colAutor.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        // Evento al confirmar edición del ISBN (Valida que no se duplique)
+        colIsbn.setOnEditCommit(event -> {
+            String antiguoIsbn = event.getOldValue();
+            String nuevoIsbn = event.getNewValue().trim();
+            Libro libro = event.getRowValue();
+
+            if (nuevoIsbn.isEmpty()) {
+                mostrarAlerta("Error", "El ISBN no puede estar vacío.");
+                tblLibros.refresh();
+                return;
+            }
+
+            if (antiguoIsbn.equals(nuevoIsbn)) return;
+
+            if (existeIsbn(nuevoIsbn)) {
+                mostrarAlerta("Error de duplicado", "El ISBN '" + nuevoIsbn + "' ya está registrado.");
+                tblLibros.refresh(); 
+            } else {
+                actualizarCampoEnBD("isbn", nuevoIsbn, antiguoIsbn);
+                libro.setIsbn(nuevoIsbn);
+            }
+        });
+
+        // Evento al confirmar edición del Título
+        colTitulo.setOnEditCommit(event -> {
+            String nuevoTitulo = event.getNewValue().trim();
+            Libro libro = event.getRowValue();
+            
+            if (nuevoTitulo.isEmpty()) {
+                mostrarAlerta("Error", "El título no puede estar vacío.");
+                tblLibros.refresh();
+                return;
+            }
+            
+            actualizarCampoEnBD("titulo", nuevoTitulo, libro.getIsbn());
+            libro.setTitulo(nuevoTitulo);
+        });
+
+        // Evento al confirmar edición del Autor
+        colAutor.setOnEditCommit(event -> {
+            String nuevoAutor = event.getNewValue().trim();
+            Libro libro = event.getRowValue();
+            
+            if (nuevoAutor.isEmpty()) {
+                mostrarAlerta("Error", "El autor no puede estar vacío.");
+                tblLibros.refresh();
+                return;
+            }
+
+            actualizarCampoEnBD("autor", nuevoAutor, libro.getIsbn());
+            libro.setAutor(nuevoAutor);
+        });
+
         connect();
         cargarLibros();
 
@@ -68,6 +130,34 @@ public class BibliotecaController implements Initializable {
         SortedList<Libro> ordenada = new SortedList<>(librosFiltrados);
         ordenada.comparatorProperty().bind(tblLibros.comparatorProperty());
         tblLibros.setItems(ordenada);
+    }
+
+    private boolean existeIsbn(String isbn) {
+        try {
+            var stmt = conn.prepareStatement("SELECT COUNT(*) FROM libros WHERE isbn = ?");
+            stmt.setString(1, isbn);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void actualizarCampoEnBD(String columna, String nuevoValor, String isbnReferencia) {
+        try {
+            String query = "UPDATE libros SET " + columna + " = ? WHERE isbn = ?";
+            var stmt = conn.prepareStatement(query);
+            stmt.setString(1, nuevoValor);
+            stmt.setString(2, isbnReferencia);
+            stmt.executeUpdate();
+            System.out.println("Base de datos actualizada correctamente.");
+        } catch (Exception e) {
+            mostrarAlerta("Error BD", "No se pudo actualizar la base de datos: " + e.getMessage());
+            cargarLibros(); 
+        }
     }
 
     private void connect() {
@@ -124,10 +214,25 @@ public class BibliotecaController implements Initializable {
         progressCarga.progressProperty().bind(task.progressProperty());
 
         task.setOnSucceeded(e -> {
+            // 1. Romper el enlace con la tarea finalizada
             lblEstado.textProperty().unbind();
             progressCarga.progressProperty().unbind();
+            
+            // 2. Limpiar la interfaz (Devolver la barra a 0 y vaciar el texto)
+            lblEstado.setText("");
+            progressCarga.setProgress(0.0);
+            
+            // 3. Cargar la base de datos y lanzar notificación
             cargarLibros();
             mostrarInfo("Sincronización", "Base de datos sincronizada");
+        });
+
+        // Manejo alternativo en caso de que la tarea falle o se cancele
+        task.setOnFailed(e -> {
+            lblEstado.textProperty().unbind();
+            progressCarga.progressProperty().unbind();
+            lblEstado.setText("Error en la sincronización.");
+            progressCarga.setProgress(0.0);
         });
 
         new Thread(task).start();
@@ -135,7 +240,6 @@ public class BibliotecaController implements Initializable {
 
     @FXML
     private void btnPrestarActionPerformed(ActionEvent event) {
-
         Libro libro = tblLibros.getSelectionModel().getSelectedItem();
         if (libro == null) {
             mostrarAlerta("Aviso", "Selecciona un libro");
@@ -176,7 +280,6 @@ public class BibliotecaController implements Initializable {
 
     @FXML
     private void btnDevolverActionPerformed(ActionEvent event) {
-
         Libro libro = tblLibros.getSelectionModel().getSelectedItem();
         if (libro == null) {
             mostrarAlerta("Aviso", "Selecciona un libro");
@@ -205,7 +308,6 @@ public class BibliotecaController implements Initializable {
 
     @FXML
     private void btnAgregarActionPerformed(ActionEvent event) {
-
         TextInputDialog d1 = new TextInputDialog();
         d1.setHeaderText("ISBN");
         Optional<String> i = d1.showAndWait();
@@ -259,9 +361,18 @@ public class BibliotecaController implements Initializable {
         }
 
         public String getIsbn() { return isbn; }
+        public void setIsbn(String isbn) { this.isbn = isbn; }
+
         public String getTitulo() { return titulo; }
+        public void setTitulo(String titulo) { this.titulo = titulo; }
+
         public String getAutor() { return autor; }
+        public void setAutor(String autor) { this.autor = autor; }
+
         public String getEstado() { return estado; }
+        public void setEstado(String estado) { this.estado = estado; }
+
         public String getPrestamo() { return prestamo; }
+        public void setPrestamo(String prestamo) { this.prestamo = prestamo; }
     }
 }
