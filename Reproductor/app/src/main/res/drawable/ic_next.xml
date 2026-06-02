@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright (C) 2026 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="168.32dp"
+    android:height="279.77dp"
+    android:viewportWidth="168.32"
+    android:viewportHeight="279.77">
+  <path
+      android:pathData="M15,257.87l117.99,-117.98l-117.99,-117.99l0,235.97z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M25.61,268.48 L129.08,165.01l14.51,-14.51a15.24,15.24 0,0 0,0 -21.22L40.12,25.81l-14.51,-14.51c-9.19,-9.19 -25.61,-2.4 -25.61,10.6L0,257.89c0,7.84 6.9,15.36 15,15s15,-6.59 15,-15L30,21.89L4.39,32.51 107.89,135.98l14.51,14.52L122.4,129.28L18.89,232.76 4.39,247.27a15,15 0,1 0,21.22 21.21Z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M147.39,7.5h13.44v264.77h-13.44z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M147.39,15h13.43l-7.5,-7.5L153.32,272.28l7.5,-7.5L147.39,264.78l7.5,7.5L154.89,7.5c0,-9.65 -15,-9.66 -15,0L139.89,272.28a7.61,7.61 0,0 0,7.5 7.5h13.43a7.61,7.61 0,0 0,7.5 -7.5L168.32,7.5a7.61,7.61 0,0 0,-7.5 -7.5L147.39,0C137.74,0 137.72,15 147.39,15Z"
+      android:fillColor="#fff"/>
+</vector>
