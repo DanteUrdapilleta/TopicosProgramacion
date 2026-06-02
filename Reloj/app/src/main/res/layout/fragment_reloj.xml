@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/txt_titulo_reloj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Reloj"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/btn_menu_reloj"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:contentDescription="Menu"
+        android:src="@android:drawable/ic_menu_sort_by_size"
+        app:tint="#FFFFFF" />
+
+    <com.example.reloj.RelojCustomView
+        android:id="@+id/custom_clock"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="133dp"
+        android:layout_marginEnd="58dp" />
+
+    <TextView
+        android:id="@+id/tv_hora_digital"
+        android:layout_width="240dp"
+        android:layout_height="85dp"
+        android:layout_below="@id/custom_clock"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="205dp"
+        android:gravity="center"
+        android:text="00:00"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp" />
+
+</RelativeLayout>

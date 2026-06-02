@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.Reloj" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+
+    <style name="Theme.Reloj" parent="Base.Theme.Reloj" />
+
+    <style name="TecladoStyle">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@drawable/button_circle_dark</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">26sp</item> <item name="android:textAllCaps">false</item>
+    </style>
+
+</resources>
